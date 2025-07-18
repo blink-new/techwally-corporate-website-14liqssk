@@ -26,8 +26,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { AiChat } from '@/components/ui/ai-chat'
 
 const Header = () => {
@@ -251,7 +251,7 @@ const Header = () => {
               </DialogTrigger>
               <DialogContent className="sm:max-w-[600px]">
                 <div className="space-y-4">
-                  <h2 className="text-lg font-poppins font-semibold">Search</h2>
+                  <DialogTitle className="text-lg font-poppins font-semibold">Search</DialogTitle>
                   <Input
                     placeholder="Search for services, solutions, or content..."
                     className="w-full"
@@ -277,6 +277,7 @@ const Header = () => {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col space-y-4 mt-6">
                   <div className="text-lg font-poppins font-semibold">
                     What We Do
@@ -355,6 +356,7 @@ const Header = () => {
       {/* AI Chat Dialog */}
       <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>
         <DialogContent className="sm:max-w-[600px] h-[600px]">
+          <DialogTitle className="sr-only">AI Support Chat</DialogTitle>
           <AiChat />
         </DialogContent>
       </Dialog>
