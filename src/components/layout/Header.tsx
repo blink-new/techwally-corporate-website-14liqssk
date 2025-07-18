@@ -30,6 +30,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
 import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { AiChat } from '@/components/ui/ai-chat'
+import AdvancedSearch from '@/components/ui/advanced-search'
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -244,26 +245,14 @@ const Header = () => {
           {/* Right Side */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-              <DialogTrigger asChild>
-                <Button variant="ghost" size="sm" className="p-2">
-                  <Search className="h-5 w-5" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[600px]">
-                <div className="space-y-4">
-                  <DialogTitle className="text-lg font-poppins font-semibold">Search</DialogTitle>
-                  <Input
-                    placeholder="Search for services, solutions, or content..."
-                    className="w-full"
-                    autoFocus
-                  />
-                  <div className="text-sm text-gray-500">
-                    Try searching for "cloud services", "cybersecurity", or "data centres"
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="p-2"
+              onClick={() => setIsSearchOpen(true)}
+            >
+              <Search className="h-5 w-5" />
+            </Button>
 
             {/* Contact Us Button */}
             <Button asChild className="hidden sm:inline-flex">
@@ -353,6 +342,9 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* Advanced Search */}
+      <AdvancedSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       {/* AI Chat Dialog */}
       <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>

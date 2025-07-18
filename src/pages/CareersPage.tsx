@@ -18,7 +18,12 @@ import {
   Share2,
   Briefcase,
   Users,
-  TrendingUp
+  TrendingUp,
+  ChevronDown,
+  Bookmark,
+  Eye,
+  Calendar,
+  Globe
 } from 'lucide-react'
 
 const CareersPage = () => {
@@ -26,109 +31,293 @@ const CareersPage = () => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [selectedJobType, setSelectedJobType] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedClassification, setSelectedClassification] = useState('')
+  const [selectedListingDate, setSelectedListingDate] = useState('')
+  const [selectedWorkType, setSelectedWorkType] = useState('')
+  const [selectedSalary, setSelectedSalary] = useState('')
+  const [selectedJob, setSelectedJob] = useState<number | null>(1)
   const [savedJobs, setSavedJobs] = useState<number[]>([])
 
-  // Mock job data
+  // Mock job data matching the reference image
   const jobs = [
     {
       id: 1,
-      title: "Senior Cloud Solutions Architect",
-      company: "Techwally",
+      title: "Manager",
+      company: "Prime East Services",
       location: "Melbourne, VIC",
-      salary: "$120,000 - $150,000",
+      salary: "$80k - $90k",
       type: "Full-time",
-      category: "Cloud Services",
+      category: "Management",
+      classification: "Administration & Office Support",
       posted: "2 days ago",
-      description: "Lead the design and implementation of cloud infrastructure solutions for enterprise clients. Work with AWS, Azure, and Google Cloud platforms.",
-      requirements: ["5+ years cloud architecture experience", "AWS/Azure certifications", "Strong communication skills"],
+      workType: "Full time",
+      description: `We are seeking an experienced Manager to join our dynamic team at Prime East Services. This role offers an excellent opportunity to lead a team of professionals while contributing to the strategic growth of our organization.
+
+Key Responsibilities:
+• Lead and manage a team of 8-12 staff members
+• Develop and implement strategic business plans
+• Oversee daily operations and ensure quality service delivery
+• Build and maintain strong client relationships
+• Monitor performance metrics and drive continuous improvement
+• Collaborate with senior leadership on organizational initiatives
+
+Requirements:
+• Minimum 5 years of management experience
+• Strong leadership and communication skills
+• Bachelor's degree in Business Administration or related field
+• Experience in service industry preferred
+• Proven track record of team development and performance management
+
+What We Offer:
+• Competitive salary package ($80,000 - $90,000)
+• Performance-based bonuses
+• Professional development opportunities
+• Flexible working arrangements
+• Comprehensive health benefits
+• Career progression pathways`,
+      requirements: ["5+ years management experience", "Leadership skills", "Bachelor's degree preferred"],
       logo: "/techwally-icon.png",
-      featured: true
+      featured: true,
+      companySize: "50-100 employees",
+      industry: "Professional Services",
+      benefits: ["Health Insurance", "Flexible Hours", "Professional Development"]
     },
     {
       id: 2,
-      title: "Cybersecurity Analyst",
-      company: "Techwally",
+      title: "Full Time Short Sales Assistant",
+      company: "ABC Corp",
       location: "Sydney, NSW",
-      salary: "$90,000 - $110,000",
+      salary: "$55k - $65k",
       type: "Full-time",
-      category: "Cyber Security",
+      category: "Sales",
+      classification: "Sales",
       posted: "3 days ago",
-      description: "Monitor security threats, conduct vulnerability assessments, and implement security measures to protect client infrastructure.",
-      requirements: ["3+ years cybersecurity experience", "Security certifications preferred", "Knowledge of SIEM tools"],
+      workType: "Full time",
+      description: `Join our growing sales team as a Short Sales Assistant. This entry-level position offers excellent training and career development opportunities in the fast-paced world of sales.
+
+Key Responsibilities:
+• Assist senior sales staff with client communications
+• Prepare sales presentations and proposals
+• Maintain accurate customer databases
+• Process sales orders and follow up on deliveries
+• Support marketing campaigns and events
+• Provide excellent customer service
+
+Requirements:
+• Strong communication and interpersonal skills
+• Attention to detail and organizational abilities
+• Basic computer skills (MS Office suite)
+• Enthusiasm for sales and customer service
+• Previous sales experience preferred but not essential
+
+What We Offer:
+• Competitive starting salary
+• Commission structure
+• Comprehensive training program
+• Career advancement opportunities
+• Supportive team environment`,
+      requirements: ["Communication skills", "Attention to detail", "MS Office"],
       logo: "/techwally-icon.png",
-      featured: false
+      featured: false,
+      companySize: "100-200 employees",
+      industry: "Sales & Marketing",
+      benefits: ["Commission", "Training", "Career Growth"]
     },
     {
       id: 3,
-      title: "Network Engineer",
-      company: "Techwally",
+      title: "Retail Stylist",
+      company: "Style Solutions",
       location: "Brisbane, QLD",
-      salary: "$80,000 - $100,000",
+      salary: "$45k - $55k",
       type: "Full-time",
-      category: "Network Services",
+      category: "Retail",
+      classification: "Retail & Consumer Products",
       posted: "5 days ago",
-      description: "Design, implement, and maintain network infrastructure for enterprise clients. Experience with Cisco and Juniper equipment required.",
-      requirements: ["CCNA/CCNP certification", "5+ years networking experience", "Troubleshooting skills"],
+      workType: "Full time",
+      description: `We are looking for a passionate Retail Stylist to join our fashion-forward team. Help customers discover their personal style while driving sales and creating exceptional shopping experiences.
+
+Key Responsibilities:
+• Provide personalized styling advice to customers
+• Create compelling visual merchandising displays
+• Maintain product knowledge and stay current with fashion trends
+• Process sales transactions and handle customer inquiries
+• Assist with inventory management and stock replenishment
+• Build lasting relationships with regular customers
+
+Requirements:
+• Passion for fashion and styling
+• Excellent customer service skills
+• Visual merchandising experience preferred
+• Ability to work in a fast-paced retail environment
+• Flexible schedule including weekends
+• Certificate in Fashion or related field advantageous
+
+Benefits:
+• Employee discount on all products
+• Flexible scheduling options
+• Ongoing training and development
+• Performance incentives
+• Creative and dynamic work environment`,
+      requirements: ["Fashion knowledge", "Customer service", "Visual merchandising"],
       logo: "/techwally-icon.png",
-      featured: false
+      featured: false,
+      companySize: "20-50 employees",
+      industry: "Retail",
+      benefits: ["Employee Discount", "Flexible Schedule", "Training"]
     },
     {
       id: 4,
-      title: "Data Center Technician",
-      company: "Techwally",
+      title: "Cleaner / Housekeeper (Every Day Avail.)",
+      company: "Home Maintenance Mates",
       location: "Perth, WA",
-      salary: "$65,000 - $80,000",
-      type: "Full-time",
-      category: "Data Centres",
+      salary: "$25 - $30 per hour",
+      type: "Part-time",
+      category: "Cleaning",
+      classification: "Trades & Services",
       posted: "1 week ago",
-      description: "Maintain and monitor data center equipment, perform hardware installations, and ensure optimal facility operations.",
-      requirements: ["2+ years data center experience", "Hardware troubleshooting skills", "Shift work availability"],
+      workType: "Part time",
+      description: `Join our reliable cleaning team providing high-quality residential and commercial cleaning services. We offer flexible hours and competitive pay for dedicated cleaners.
+
+Key Responsibilities:
+• Perform thorough cleaning of residential and commercial properties
+• Follow detailed cleaning checklists and procedures
+• Use cleaning equipment and supplies safely and effectively
+• Maintain high standards of cleanliness and presentation
+• Communicate professionally with clients
+• Report any maintenance issues or concerns
+
+Requirements:
+• Previous cleaning experience preferred
+• Reliable and punctual
+• Attention to detail
+• Physical fitness for cleaning tasks
+• Own transportation preferred
+• Police check required
+
+What We Offer:
+• Competitive hourly rates ($25-$30/hour)
+• Flexible scheduling - choose your hours
+• Ongoing work with regular clients
+• All cleaning supplies provided
+• Supportive team environment
+• Opportunity for additional hours`,
+      requirements: ["Cleaning experience", "Reliability", "Own transport"],
       logo: "/techwally-icon.png",
-      featured: false
+      featured: false,
+      companySize: "10-20 employees",
+      industry: "Services",
+      benefits: ["Flexible Hours", "Competitive Pay", "Supplies Provided"]
     },
     {
       id: 5,
-      title: "Business Continuity Consultant",
-      company: "Techwally",
+      title: "Customer Service Representative",
+      company: "TechSupport Solutions",
       location: "Adelaide, SA",
-      salary: "$95,000 - $115,000",
+      salary: "$50k - $60k",
       type: "Full-time",
-      category: "Business Continuity",
+      category: "Customer Service",
+      classification: "Call Centre & Customer Service",
       posted: "1 week ago",
-      description: "Develop and implement business continuity plans for clients, conduct risk assessments, and provide disaster recovery solutions.",
-      requirements: ["Business continuity certification", "Risk management experience", "Client-facing skills"],
+      workType: "Full time",
+      description: `We are seeking a dedicated Customer Service Representative to join our growing support team. Provide exceptional service to our clients while helping resolve technical issues and inquiries.
+
+Key Responsibilities:
+• Handle inbound customer calls and emails professionally
+• Troubleshoot technical issues and provide solutions
+• Document customer interactions in CRM system
+• Escalate complex issues to appropriate departments
+• Follow up on customer concerns to ensure resolution
+• Maintain product knowledge and stay updated on procedures
+
+Requirements:
+• Excellent verbal and written communication skills
+• Previous customer service experience preferred
+• Basic technical troubleshooting abilities
+• Patience and empathy when dealing with frustrated customers
+• Ability to work in a fast-paced environment
+• High school diploma or equivalent
+
+Benefits:
+• Comprehensive training program
+• Career advancement opportunities
+• Health and dental benefits
+• Paid time off and holidays
+• Performance bonuses
+• Friendly team environment`,
+      requirements: ["Communication skills", "Customer service experience", "Technical aptitude"],
       logo: "/techwally-icon.png",
-      featured: false
+      featured: false,
+      companySize: "50-100 employees",
+      industry: "Technology",
+      benefits: ["Health Benefits", "Training", "Performance Bonuses"]
     },
     {
       id: 6,
-      title: "Systems Administrator",
-      company: "Techwally",
-      location: "Canberra, ACT",
-      salary: "$75,000 - $95,000",
-      type: "Full-time",
-      category: "Systems Maintenance",
+      title: "General Labourer",
+      company: "WorkMate",
+      location: "Darwin, NT",
+      salary: "$28 - $35 per hour",
+      type: "Contract",
+      category: "Labour",
+      classification: "Trades & Services",
       posted: "2 weeks ago",
-      description: "Manage and maintain Windows and Linux server environments, implement system updates, and provide technical support.",
-      requirements: ["Windows/Linux administration", "PowerShell/Bash scripting", "3+ years experience"],
+      workType: "Contract",
+      description: `Seeking reliable General Labourers for various construction and maintenance projects. Great opportunity for those looking to gain experience in the trades industry.
+
+Key Responsibilities:
+• Assist tradespeople with various construction tasks
+• Load and unload materials and equipment
+• Maintain clean and safe work sites
+• Follow safety protocols and wear appropriate PPE
+• Operate basic hand tools and equipment
+• Complete assigned tasks efficiently and safely
+
+Requirements:
+• Physical fitness and ability to lift heavy objects
+• Willingness to work outdoors in various weather conditions
+• Basic understanding of workplace safety
+• Reliable transportation to job sites
+• White card (construction induction) preferred
+• Previous labouring experience advantageous
+
+What We Offer:
+• Competitive hourly rates
+• Immediate start available
+• Variety of projects and locations
+• Opportunity to learn new skills
+• Potential for permanent employment
+• Safety training provided`,
+      requirements: ["Physical fitness", "White card preferred", "Reliable transport"],
       logo: "/techwally-icon.png",
-      featured: false
+      featured: false,
+      companySize: "100+ employees",
+      industry: "Construction",
+      benefits: ["Immediate Start", "Skill Development", "Competitive Pay"]
     }
   ]
 
-  const locations = ["All Locations", "Melbourne, VIC", "Sydney, NSW", "Brisbane, QLD", "Perth, WA", "Adelaide, SA", "Canberra, ACT"]
-  const jobTypes = ["All Types", "Full-time", "Part-time", "Contract", "Casual"]
-  const categories = ["All Categories", "Cloud Services", "Cyber Security", "Network Services", "Data Centres", "Business Continuity", "Systems Maintenance"]
+  const locations = ["All locations", "Melbourne, VIC", "Sydney, NSW", "Brisbane, QLD", "Perth, WA", "Adelaide, SA", "Darwin, NT"]
+  const jobTypes = ["All work types", "Full-time", "Part-time", "Contract", "Casual", "Temporary"]
+  const categories = ["All categories", "Management", "Sales", "Retail", "Cleaning", "Customer Service", "Labour"]
+  const classifications = ["All classifications", "Administration & Office Support", "Sales", "Retail & Consumer Products", "Trades & Services", "Call Centre & Customer Service"]
+  const listingDates = ["All listing dates", "Last 24 hours", "Last 3 days", "Last 7 days", "Last 14 days"]
+  const workTypes = ["All work types", "Full time", "Part time", "Contract", "Casual"]
+  const salaryRanges = ["All salary ranges", "$40k - $60k", "$60k - $80k", "$80k - $100k", "$100k+"]
 
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         job.description.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesLocation = !selectedLocation || selectedLocation === "All Locations" || job.location === selectedLocation
-    const matchesType = !selectedJobType || selectedJobType === "All Types" || job.type === selectedJobType
-    const matchesCategory = !selectedCategory || selectedCategory === "All Categories" || job.category === selectedCategory
+                         job.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         job.company.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesLocation = !selectedLocation || selectedLocation === "All locations" || job.location === selectedLocation
+    const matchesType = !selectedJobType || selectedJobType === "All work types" || job.type === selectedJobType
+    const matchesCategory = !selectedCategory || selectedCategory === "All categories" || job.category === selectedCategory
+    const matchesClassification = !selectedClassification || selectedClassification === "All classifications" || job.classification === selectedClassification
+    const matchesWorkType = !selectedWorkType || selectedWorkType === "All work types" || job.workType === selectedWorkType
     
-    return matchesSearch && matchesLocation && matchesType && matchesCategory
+    return matchesSearch && matchesLocation && matchesType && matchesCategory && matchesClassification && matchesWorkType
   })
+
+  const selectedJobData = jobs.find(job => job.id === selectedJob)
 
   const toggleSaveJob = (jobId: number) => {
     setSavedJobs(prev => 
@@ -142,252 +331,291 @@ const CareersPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-techwally-primary to-techwally-secondary py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our Team
-            </h1>
-            <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Build your career with Australia's leading IT solutions provider. 
-              Discover opportunities to grow, innovate, and make an impact.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
-              <div className="flex-1">
-                <Input
-                  placeholder="Job title, keywords, or company"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="h-12 text-gray-900 bg-white"
-                />
+      {/* Top Section with Primary Background and Pattern */}
+      <section className="bg-gradient-to-br from-[#1e3a8a] via-[#1e40af] to-[#2563eb] relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }} />
+        </div>
+        
+        <div className="relative z-10 px-4 py-8">
+          <div className="max-w-7xl mx-auto">
+            {/* Search Bar and Filters */}
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div className="lg:col-span-2">
+                  <Input
+                    placeholder="Job title, keywords, or company"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="h-12 text-lg"
+                  />
+                </div>
+                <div>
+                  <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                    <SelectTrigger className="h-12">
+                      <SelectValue placeholder="Location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {locations.map(location => (
+                        <SelectItem key={location} value={location}>{location}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Button size="lg" className="w-full h-12 bg-[#e91e63] hover:bg-[#c2185b] text-white font-semibold">
+                    <Search className="h-5 w-5 mr-2" />
+                    SEEK
+                  </Button>
+                </div>
               </div>
-              <div className="flex-1">
-                <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                  <SelectTrigger className="h-12 bg-white text-gray-900">
-                    <SelectValue placeholder="Location" />
+              
+              {/* Filter Pills */}
+              <div className="flex flex-wrap gap-2">
+                <Select value={selectedJobType} onValueChange={setSelectedJobType}>
+                  <SelectTrigger className="w-auto h-8 text-sm">
+                    <SelectValue placeholder="Work type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {locations.map(location => (
-                      <SelectItem key={location} value={location}>{location}</SelectItem>
+                    {jobTypes.map(type => (
+                      <SelectItem key={type} value={type}>{type}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-auto h-8 text-sm">
+                    <SelectValue placeholder="Pay" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {salaryRanges.map(range => (
+                      <SelectItem key={range} value={range}>{range}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedClassification} onValueChange={setSelectedClassification}>
+                  <SelectTrigger className="w-auto h-8 text-sm">
+                    <SelectValue placeholder="Classification" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {classifications.map(classification => (
+                      <SelectItem key={classification} value={classification}>{classification}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedListingDate} onValueChange={setSelectedListingDate}>
+                  <SelectTrigger className="w-auto h-8 text-sm">
+                    <SelectValue placeholder="Listing date" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {listingDates.map(date => (
+                      <SelectItem key={date} value={date}>{date}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Button variant="outline" size="sm" className="h-8 text-sm">
+                  More filters
+                </Button>
+                
+                <Button variant="outline" size="sm" className="h-8 text-sm">
+                  Advertiser
+                </Button>
+                
+                <Button variant="outline" size="sm" className="h-8 text-sm">
+                  Customer Service
+                </Button>
+                
+                <Button variant="outline" size="sm" className="h-8 text-sm">
+                  Finance
+                </Button>
+                
+                <Button variant="ghost" size="sm" className="h-8 text-sm text-blue-600">
+                  <Filter className="h-3 w-3 mr-1" />
+                </Button>
               </div>
-              <Button size="lg" className="bg-white text-techwally-primary hover:bg-gray-100 h-12 px-8">
-                <Search className="h-5 w-5 mr-2" />
-                Search Jobs
-              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-8">
+      {/* Main Jobs Section */}
+      <section className="py-0">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex gap-6">
             
-            {/* Sidebar Filters */}
-            <div className="lg:w-1/4">
-              <Card className="sticky top-24">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Filter className="h-5 w-5 mr-2" />
-                    Filter Jobs
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Job Type</label>
-                    <Select value={selectedJobType} onValueChange={setSelectedJobType}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select job type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {jobTypes.map(type => (
-                          <SelectItem key={type} value={type}>{type}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div>
-                    <label className="text-sm font-medium mb-2 block">Category</label>
-                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories.map(category => (
-                          <SelectItem key={category} value={category}>{category}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <Button 
-                    variant="outline" 
-                    className="w-full"
-                    onClick={() => {
-                      setSelectedLocation('')
-                      setSelectedJobType('')
-                      setSelectedCategory('')
-                      setSearchQuery('')
-                    }}
+            {/* Left Side - Job Cards */}
+            <div className="w-1/2 space-y-0 border-r border-gray-200">
+              {/* Results Header */}
+              <div className="p-4 border-b border-gray-200 bg-gray-50">
+                <p className="text-sm text-gray-600">
+                  {filteredJobs.length} jobs found
+                </p>
+              </div>
+              
+              {/* Job Cards */}
+              <div className="max-h-[800px] overflow-y-auto">
+                {filteredJobs.map((job, index) => (
+                  <div 
+                    key={job.id} 
+                    className={`p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors ${
+                      selectedJob === job.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+                    }`}
+                    onClick={() => setSelectedJob(job.id)}
                   >
-                    Clear Filters
-                  </Button>
-                </CardContent>
-              </Card>
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-semibold text-blue-600 hover:underline">
+                            {job.title}
+                          </h3>
+                          {job.featured && (
+                            <Badge className="bg-[#e91e63] text-white text-xs px-2 py-0">
+                              NEW
+                            </Badge>
+                          )}
+                        </div>
+                        
+                        <p className="text-sm text-gray-700 mb-1">{job.company}</p>
+                        
+                        <div className="flex items-center gap-4 text-xs text-gray-600 mb-2">
+                          <span className="flex items-center">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {job.location}
+                          </span>
+                          <span>{job.classification}</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-4 text-xs text-gray-600">
+                          <span>Full time</span>
+                          <span>{job.salary}</span>
+                        </div>
+                        
+                        <p className="text-xs text-gray-500 mt-2">{job.posted}</p>
+                      </div>
+                      
+                      <div className="flex flex-col gap-1 ml-4">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleSaveJob(job.id)
+                          }}
+                          className="h-8 w-8 p-0"
+                        >
+                          <Heart className={`h-4 w-4 ${savedJobs.includes(job.id) ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Job Listings */}
-            <div className="lg:w-3/4">
-              {/* Results Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    {filteredJobs.length} Jobs Found
-                  </h2>
-                  <p className="text-gray-600">
-                    Showing results for your search criteria
-                  </p>
-                </div>
-                <Select defaultValue="newest">
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="newest">Newest First</SelectItem>
-                    <SelectItem value="salary-high">Salary: High to Low</SelectItem>
-                    <SelectItem value="salary-low">Salary: Low to High</SelectItem>
-                    <SelectItem value="relevance">Most Relevant</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Job Cards */}
-              <div className="space-y-4">
-                {filteredJobs.map((job) => (
-                  <Card key={job.id} className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-techwally-primary">
-                    <CardContent className="p-6">
+            {/* Right Side - Job Details Window */}
+            <div className="w-1/2">
+              {selectedJobData ? (
+                <div className="sticky top-4">
+                  <Card className="shadow-lg">
+                    <CardHeader className="pb-4">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-3">
-                            <img 
-                              src={job.logo} 
-                              alt={job.company}
-                              className="w-12 h-12 rounded-lg object-cover"
-                            />
-                            <div>
-                              <h3 className="text-xl font-bold text-gray-900 hover:text-techwally-primary cursor-pointer">
-                                <Link to={`/careers/${job.id}`}>
-                                  {job.title}
-                                </Link>
-                              </h3>
-                              <p className="text-gray-600 font-medium">{job.company}</p>
-                            </div>
-                            {job.featured && (
-                              <Badge className="bg-techwally-secondary text-white">
-                                Featured
-                              </Badge>
-                            )}
-                          </div>
-
-                          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                            <div className="flex items-center">
+                          <CardTitle className="text-xl text-blue-600 mb-2">
+                            {selectedJobData.title}
+                          </CardTitle>
+                          <p className="text-gray-700 font-medium mb-2">{selectedJobData.company}</p>
+                          <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                            <span className="flex items-center">
                               <MapPin className="h-4 w-4 mr-1" />
-                              {job.location}
-                            </div>
-                            <div className="flex items-center">
+                              {selectedJobData.location}
+                            </span>
+                            <span className="flex items-center">
                               <DollarSign className="h-4 w-4 mr-1" />
-                              {job.salary}
-                            </div>
-                            <div className="flex items-center">
-                              <Briefcase className="h-4 w-4 mr-1" />
-                              {job.type}
-                            </div>
-                            <div className="flex items-center">
-                              <Clock className="h-4 w-4 mr-1" />
-                              {job.posted}
-                            </div>
+                              {selectedJobData.salary}
+                            </span>
                           </div>
-
-                          <p className="text-gray-700 mb-4 line-clamp-2">
-                            {job.description}
-                          </p>
-
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {job.requirements.slice(0, 3).map((req, index) => (
-                              <Badge key={index} variant="secondary" className="text-xs">
-                                {req}
-                              </Badge>
-                            ))}
+                          <div className="flex items-center gap-2 mb-4">
+                            <Badge variant="outline" className="text-xs">
+                              {selectedJobData.workType}
+                            </Badge>
+                            <Badge variant="outline" className="text-xs">
+                              {selectedJobData.classification}
+                            </Badge>
                           </div>
                         </div>
-
-                        <div className="flex flex-col gap-2 ml-4">
+                        <div className="flex gap-2">
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => toggleSaveJob(job.id)}
-                            className={savedJobs.includes(job.id) ? "text-red-600 border-red-600" : ""}
+                            onClick={() => toggleSaveJob(selectedJobData.id)}
+                            className={savedJobs.includes(selectedJobData.id) ? "text-red-600 border-red-600" : ""}
                           >
-                            <Heart className={`h-4 w-4 ${savedJobs.includes(job.id) ? "fill-current" : ""}`} />
+                            <Heart className={`h-4 w-4 ${savedJobs.includes(selectedJobData.id) ? "fill-current" : ""}`} />
                           </Button>
                           <Button variant="outline" size="sm">
                             <Share2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </div>
-
-                      <div className="flex items-center justify-between pt-4 border-t">
-                        <Badge variant="outline" className="text-techwally-primary border-techwally-primary">
-                          {job.category}
-                        </Badge>
-                        <Button asChild className="bg-techwally-primary hover:bg-techwally-secondary">
-                          <Link to={`/careers/${job.id}`}>
-                            View Details
-                          </Link>
+                      
+                      <div className="flex gap-2">
+                        <Button className="bg-[#e91e63] hover:bg-[#c2185b] text-white flex-1">
+                          Apply now
                         </Button>
+                        <Button variant="outline" className="text-blue-600 border-blue-600">
+                          Save
+                        </Button>
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent className="max-h-[600px] overflow-y-auto">
+                      <div className="space-y-6">
+                        <div>
+                          <h4 className="font-semibold mb-2">About the role</h4>
+                          <div className="text-sm text-gray-700 whitespace-pre-line">
+                            {selectedJobData.description}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-2">Company Information</h4>
+                          <div className="space-y-2 text-sm text-gray-700">
+                            <p><strong>Industry:</strong> {selectedJobData.industry}</p>
+                            <p><strong>Company Size:</strong> {selectedJobData.companySize}</p>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-2">Benefits</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedJobData.benefits.map((benefit, index) => (
+                              <Badge key={index} variant="secondary" className="text-xs">
+                                {benefit}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="pt-4 border-t">
+                          <p className="text-xs text-gray-500 mb-2">Posted {selectedJobData.posted}</p>
+                          <p className="text-xs text-gray-500">Job ID: {selectedJobData.id.toString().padStart(6, '0')}</p>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
-                ))}
-              </div>
-
-              {/* Load More */}
-              {filteredJobs.length > 0 && (
-                <div className="text-center mt-8">
-                  <Button variant="outline" size="lg">
-                    Load More Jobs
-                  </Button>
                 </div>
-              )}
-
-              {/* No Results */}
-              {filteredJobs.length === 0 && (
-                <div className="text-center py-12">
-                  <div className="max-w-md mx-auto">
-                    <Briefcase className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      No jobs found
-                    </h3>
-                    <p className="text-gray-600 mb-6">
-                      Try adjusting your search criteria or browse all available positions.
-                    </p>
-                    <Button 
-                      onClick={() => {
-                        setSelectedLocation('')
-                        setSelectedJobType('')
-                        setSelectedCategory('')
-                        setSearchQuery('')
-                      }}
-                      className="bg-techwally-primary hover:bg-techwally-secondary"
-                    >
-                      View All Jobs
-                    </Button>
+              ) : (
+                <div className="flex items-center justify-center h-96 text-gray-500">
+                  <div className="text-center">
+                    <Briefcase className="h-16 w-16 mx-auto mb-4 text-gray-300" />
+                    <p>Select a job to view details</p>
                   </div>
                 </div>
               )}
@@ -396,47 +624,19 @@ const CareersPage = () => {
         </div>
       </section>
 
-      {/* Why Work With Us */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose Techwally?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join a team that values innovation, growth, and work-life balance
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-techwally-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Career Growth</h3>
-              <p className="text-gray-600">
-                Continuous learning opportunities and clear career progression paths
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-techwally-secondary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Great Team</h3>
-              <p className="text-gray-600">
-                Work with passionate professionals in a collaborative environment
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-techwally-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Building className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Work-Life Balance</h3>
-              <p className="text-gray-600">
-                Flexible working arrangements and comprehensive benefits package
-              </p>
+      {/* Email Alert Section */}
+      <section className="py-8 bg-gray-50 border-t">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <h3 className="font-semibold mb-2">Receive new jobs for this search by email</h3>
+            <div className="flex gap-2">
+              <Input 
+                placeholder="Enter your email" 
+                className="flex-1"
+              />
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                Create alert
+              </Button>
             </div>
           </div>
         </div>

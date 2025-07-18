@@ -39,6 +39,9 @@ import ManufacturingPage from '@/pages/industries/ManufacturingPage'
 import ProfessionalServicesPage from '@/pages/industries/ProfessionalServicesPage'
 import AgedCarePage from '@/pages/industries/AgedCarePage'
 
+// Job Details Page
+import JobDetailsPage from '@/pages/JobDetailsPage'
+
 function App() {
   return (
     <Router>
@@ -49,7 +52,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/careers" element={<CareersPage />} />
-          <Route path="/careers/:id" element={<CareersPage />} />
+          <Route path="/careers/:id" element={<JobDetailsPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/why-techwally" element={<WhyTechwallyPage />} />
           

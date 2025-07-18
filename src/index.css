@@ -119,20 +119,4 @@
   .border-techwally-secondary {
     border-color: #00888a;
   }
-  
-  .hover\:bg-techwally-primary:hover {
-    background-color: #00607c;
-  }
-  
-  .hover\:bg-techwally-secondary:hover {
-    background-color: #00888a;
-  }
-  
-  .hover\:text-techwally-primary:hover {
-    color: #00607c;
-  }
-  
-  .hover\:text-techwally-secondary:hover {
-    color: #00888a;
-  }
 }
