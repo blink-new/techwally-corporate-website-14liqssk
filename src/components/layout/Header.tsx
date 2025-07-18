@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog'
+import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { AiChat } from '@/components/ui/ai-chat'
 
 const Header = () => {
@@ -356,7 +357,9 @@ const Header = () => {
       {/* AI Chat Dialog */}
       <Dialog open={isChatOpen} onOpenChange={setIsChatOpen}>
         <DialogContent className="sm:max-w-[600px] h-[600px]">
-          <DialogTitle className="sr-only">AI Support Chat</DialogTitle>
+          <VisuallyHidden>
+            <DialogTitle>AI Support Chat</DialogTitle>
+          </VisuallyHidden>
           <AiChat />
         </DialogContent>
       </Dialog>
